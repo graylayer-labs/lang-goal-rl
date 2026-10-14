@@ -38,3 +38,24 @@ jobs:
         run: >-
           uvx diff-cover@10.6.0 coverage.xml --compare-branch="origin/$BASE_REF"
           --fail-under=80
+
+  # The org's shared CI (graylayer-labs/.github, ci-python.yml). Reports as
+  # "checks / checks". Runs beside the inline job above until main requires
+  # "checks / checks" (#8); then the inline job is removed.
+  shared:
+    name: checks
+    permissions:
+      contents: read
+    uses: graylayer-labs/.github/.github/workflows/ci-python.yml@8c9fa19473d67349548fa516aa01fe4753e07003 # v1.0.0
+    with:
+      # MuJoCo needs a GL backend even for rgb_array rendering; with no X11 display on
+      # the runner, use the OSMesa software renderer.
+      system-packages: libosmesa6-dev libgl1 libglfw3
+      env: MUJOCO_GL=osmesa
+      pytest-args: tests/lang_goal_rl -q
+      coverage-source: lang_goal_rl
+      # ruff and ty are not in the dev group and format fails on main today; turned
+      # on by #3.
+      ruff: false
+      format: false
+      ty: false
