@@ -18,8 +18,7 @@ Read first, every time: `ROADMAP.md` at the repo root — the staged plan
 what its proof gate requires before touching anything, so what you build has
 the right interface.
 
-Repo: `~/Projects/lang-goal-rl` — local-only, not pushed, not UrbanFox work,
-a personal research project on goal-conditioned RL with a continuous,
+Repo: `~/Projects/lang-goal-rl` — a research project on goal-conditioned RL with a continuous,
 language-embedding-derived goal space.
 
 Layout:
